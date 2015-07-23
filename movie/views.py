@@ -6,3 +6,8 @@ from django.http import HttpResponse
 def index(request):
     # Render main page template here!
     return HttpResponse("Yo baby!")
+
+def search(request):
+    query = request.GET.get('query')
+    search_results = 
+    return HttpResponse(query)
