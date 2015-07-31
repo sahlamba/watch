@@ -7,7 +7,7 @@ import pdb
 
 from django.http import HttpResponse
 # Create your views here.
-url = 'http://www.omdbapi.com/?t=Game of Thrones&Season=1&Episode=1'
+url = 'http://www.omdbapi.com/?'
 
 def index(request):
     # Render main page template here!
@@ -15,7 +15,8 @@ def index(request):
 
 def search(request):
     query = request.GET.get('query')
-    search_results = requests.get(url)
+    search_url = url + 's=' + query + '&type=movie'
+    search_results = requests.get(search_url)
     json_results = search_results.json()
     pdb.set_trace()
-    return HttpResponse(json_results['Title'])
+    return HttpResponse(json_results['Search'])
