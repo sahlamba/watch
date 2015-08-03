@@ -11,8 +11,9 @@ url = 'http://www.omdbapi.com/?'
 
 def index(request):
     # Render main page template here!
-    return HttpResponse("Yo baby!")
+    return render(request, 'templates/index.html')
 
+# API views
 def search(request):
     query = request.GET.get('query')
     search_url = url + 's=' + query + '&type=movie'
