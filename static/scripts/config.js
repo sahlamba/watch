@@ -9,7 +9,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider',
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: '../../templates/views/home.html',
+        templateUrl: '/static/views/home.html',
         controller: 'HomeController'
       });
 
