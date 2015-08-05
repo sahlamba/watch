@@ -9,10 +9,6 @@ from django.http import HttpResponse
 # Create your views here.
 url = 'http://www.omdbapi.com/?'
 
-def index(request):
-    # Render main page template here!
-    return render(request, 'templates/index.html')
-
 # API views
 def search(request):
     query = request.GET.get('query')
