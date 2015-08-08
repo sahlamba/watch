@@ -1,0 +1,6 @@
+Django==1.8.3
+psycopg2==2.6.1
+py-mysql2pgsql==0.1.5
+PyYAML==3.11
+requests==2.7.0
+termcolor==1.1.0
