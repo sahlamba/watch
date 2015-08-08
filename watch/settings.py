@@ -30,8 +30,7 @@ ALLOWED_HOSTS = ['*']
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-
-DATABASES = { 'default' : dj_database_url.config()}
+DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -92,6 +91,11 @@ WSGI_APPLICATION = 'watch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        "NAME": "d355eslblshmvc",
+        "USER": "ukkvhytsptrltn",
+        "PASSWORD": "k5eGfMMiAR3spcuUeoh0sWIpL_",
+        "HOST": "ec2-54-204-0-120.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
 
