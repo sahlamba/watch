@@ -23,3 +23,6 @@ urlpatterns = [
     url(r'^movie/', include('movie.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
+
+if settings.DEBUG:
+   urlpatterns += staticfiles_urlpatterns()
