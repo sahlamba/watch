@@ -28,6 +28,15 @@ DEBUG = True
 # Allow all host hosts/domain names for this site
 ALLOWED_HOSTS = ['*']
 
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+# We only need the engine name, as heroku takes care of the rest
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    }
+}
+
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
@@ -83,22 +92,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'watch.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-# We only need the engine name, as heroku takes care of the rest
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        "NAME": "d355eslblshmvc",
-        "USER": "ukkvhytsptrltn",
-        "PASSWORD": "k5eGfMMiAR3spcuUeoh0sWIpL_",
-        "HOST": "ec2-54-204-0-120.compute-1.amazonaws.com",
-        "PORT": "5432",
-    }
-}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
