@@ -1,4 +1,4 @@
 // app.js
 'use strict';
 
-var app = angular.module('PopTheCorn', ['ui.router', 'ngAnimate']);
+var app = angular.module('PopTheCorn', ['ngSanitize', 'ui.router', 'ngAnimate']);
