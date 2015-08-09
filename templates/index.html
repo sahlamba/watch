@@ -6,11 +6,15 @@
     <title ng-bind="title"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/general.css">
     <link rel="stylesheet" href="/static/css/master.css">
   </head>
   <body ng-cloak class="ng-cloak">
-    <div class="">
+    <div ng-include src="'/static/views/header.html'"></div>
+    <div class="ui-view-container">
       <div ui-view>Loading...</div>
     </div>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
