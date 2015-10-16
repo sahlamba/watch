@@ -9,7 +9,8 @@ from urllib2 import Request, urlopen
 from django.http import HttpResponse
 # Create your views here.
 #url = 'http://www.omdbapi.com/?'
-
+API_KEY = 'dff18c3dae351bbd69a9af3311e7cfea'
+url = 'http://api.themoviedb.org/' + API_KEY + '/movie/'
 
 #this hash function receives the name of the file and returns the hash code
 def get_hash(name):
@@ -40,9 +41,13 @@ def remove_ext(filename):
 
 def show(request):
     movie_id = request.GET.get('query')
-    omdb_query = url + 'i=' + movie_id + '&plot=full&r=json'
-    omdb_request = Request(omdb_query)
-    response_body = urlopen(omdb_request).read()
+    #omdb_query = url + 'i=' + movie_id + '&plot=full&r=json'
+    #omdb_request = Request(omdb_query)
+    #response_body = urlopen(omdb_request).read()
+    headers = {'Accept': 'application/json'}
+    tmdb_query = url + movie_id
+    tmdb_request = Request(tmdb_query, headers)
+    response_body = urlopen(tbmd_request).read()
     # Send json response to frontend
     return HttpResponse(json.dumps(response_body),content_type="application/json")
 
