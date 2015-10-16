@@ -10,7 +10,7 @@ from django.http import HttpResponse
 # Create your views here.
 #url = 'http://www.omdbapi.com/?'
 API_KEY = 'dff18c3dae351bbd69a9af3311e7cfea'
-url = 'http://api.themoviedb.org/' + API_KEY + '/movie/'
+url = 'http://api.themoviedb.org/3/movie/'
 
 #this hash function receives the name of the file and returns the hash code
 def get_hash(name):
@@ -45,11 +45,11 @@ def show(request):
     #omdb_request = Request(omdb_query)
     #response_body = urlopen(omdb_request).read()
     headers = {'Accept': 'application/json'}
-    tmdb_query = url + movie_id
+    tmdb_query = url + movie_id + '?api_key=' + API_KEY
     tmdb_request = Request(tmdb_query, headers)
     response_body = urlopen(tbmd_request).read()
     # Send json response to frontend
-    return HttpResponse(json.dumps(response_body),content_type="application/json")
+    return HttpResponse(json.dumps(response_body), content_type = "application/json")
 
 def subtitles(request):
     file_name = request.GET.get('query')
@@ -60,4 +60,4 @@ def subtitles(request):
     subDB_query = query_link
     subDB_request = Request(subDB_query, headers)
     response_sub = urlopen(subDB_request).read()
-    return HttpResponse(json.dumps(response_sub),content_type="application/json")
+    return HttpResponse(json.dumps(response_sub), content_type = "application/json")
