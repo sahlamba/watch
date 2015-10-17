@@ -41,6 +41,20 @@ def remove_ext(filename):
 #     json_results = search_results.json()
 #     #return HttpResponse(json_results['Search'])
 
+
+def youtube_vid(movie_id):
+    headers = {
+        'Accept': 'application/json'
+    }
+    trailer_query = url + movie_id + '/videos' + '?api_key=' + API_KEY
+    trailer_request = Request(trailer_query, headers = headers)
+    response_body = urlopen(trailer_request).read()
+    response_body = json.dumps(response_body)
+    return response_body
+
+
+
+
 def show(request):
     movie_id = request.GET.get('query')
     #omdb_query = url + 'i=' + movie_id + '&plot=full&r=json'
@@ -50,11 +64,16 @@ def show(request):
     tmdb_query = url + movie_id + '?api_key=' + API_KEY
     tmdb_request = Request(tmdb_query, headers = headers)
     response_body = urlopen(tmdb_request).read()
+    trailer = youtube_vid(movie_id)
+    #response_body.trailer = trailer
+    response_body = json.loads(response_body)
+    response_body["trailer"] = trailer
     # Send json response to frontend
     try:
         return HttpResponse(json.dumps(response_body), content_type = "application/json")
     except:
         return HttpResponse(json.dumps({ "error": "Check the movie Id" }), content_type = "application/json")
+
 def subtitles(request):
     file_name = request.GET.get('query')
     file_name = remove_ext(file_name)
