@@ -32,10 +32,20 @@ def youtube_vid(movie_id):
     trailer_request = Request(trailer_query, headers = headers)
     response_body = urlopen(trailer_request).read()
     response_body = json.loads(response_body)
-    return response_body
+    trailer_url = 'https://www.youtube.com/watch?v=' + str(response_body["results"][0]["key"])
+    return trailer_url
 
+def credits(movie_id):
+    headers = { 'Accept': 'application/json' }
+    credits_url = url + movie_id + '/credits' + '?api_key=' + API_KEY
+    credits_request = Request(credits_url, headers = headers)
+    credits_body = urlopen(credits_request).read()
+    credits_body = json.loads(credits_body)
+    return credits_body
+    
 def show(request):
     try:
+        # TMDB API Start
         movie_id = request.GET.get('query')
         headers = {'Accept': 'application/json'}
         tmdb_query = url + movie_id + '?api_key=' + API_KEY
@@ -44,9 +54,24 @@ def show(request):
         trailer = youtube_vid(movie_id)
         response_body = json.loads(response_body)
         response_body["trailer"] = trailer
+        #returning image using poster path and backdrop path
+        response_body["poster"] = 'http://image.tmdb.org/t/p/w500/' + str(response_body["poster_path"])
+        response_body["backdrop"] = 'http://image.tmdb.org/t/p/w500/' + str(response_body["backdrop_path"])
         #in trailer link of trailer is stored, in subtitle subtitle url is saved
         subtitle_url = subtitles(str(response_body["original_title"]))
-        response_body["subtitle"]=subtitle_url
+        credits_body = credits(movie_id)
+        #start of cast
+        full_cast = []
+        for cast in credits_body["cast"][:5]:
+            full_cast.append({"character": str(cast["character"]), "name": str(cast["name"]), "photo": 'http://image.tmdb.org/t/p/w500/' + str(cast["profile_path"])})
+        #end of cast
+        # start of crew
+        full_crew = [crew for crew in credits_body["crew"] if str(crew["job"]) == 'Director']
+        full_crew = [{"job": str(crew["job"]), "name": str(crew["name"]), "photo": 'http://image.tmdb.org/t/p/w500/' + str(crew["profile_path"])} for crew in full_crew]
+        response_body["cast"] = full_cast
+        response_body["crew"] = full_crew
+        response_body["subtitle"] = subtitle_url
+        # TMDB API End
         # Send json response to frontend
         return HttpResponse(json.dumps(response_body), content_type = "application/json")
     except:
