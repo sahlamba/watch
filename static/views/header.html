@@ -3,10 +3,7 @@
   <input class="search-box" type="text" name="search"
     placeholder="Search movies"
     ng-model="search.query"
-    ng-change="search.search()">
-</div>
-<div class="searh-results" id="search-results">
-  <div class="result-card" ng-repeat="result in search.results">
-    <h1 ng-bind="result.title"></h1>
-  </div>
+    ng-change="search.search()"
+    autofocus>
+  <div id="ajax-loader"></div>
 </div>

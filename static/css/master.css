@@ -7,6 +7,7 @@
   text-align: center;
   box-shadow: 0 1px 3px rgba(1, 1, 1, 0.5);
   -webkit-box-shadow: 0 1px 3px rgba(1, 1, 1, 0.5);
+  z-index: 1000
 }
 
 .search-box {
@@ -24,4 +25,42 @@
 
 .search-box:focus {
   border-bottom-color: #000;
+}
+
+.search-results {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  padding: 20px 120px;
+  background-color: #fff;
+}
+
+.welcome-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -34px;
+  margin-left: -212px;
+}
+
+.welcome-message .underline {
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 120px;
+  height: 5px;
+  background-color: #C15757;
+}
+
+.welcome-message img {
+  height: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 7px;
+}
+
+.welcome-message p.title {
+  display: inline-block;
+  vertical-align: middle;
+  color: #F06868;
+  font-size: 40px;
 }
