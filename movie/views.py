@@ -11,6 +11,7 @@ from django.http import HttpResponse
 API_KEY = 'dff18c3dae351bbd69a9af3311e7cfea'
 url = 'http://api.themoviedb.org/3/movie/'
 
+
 def remove_ext(filename):
     # time for some cool coding, bitch!!
     for ext in video_extensions:
@@ -19,12 +20,18 @@ def remove_ext(filename):
     # hash = get_hash(filename)
 
 # API views
-# def search(request):
-#     query = request.GET.get('query')
-#     search_url = url + 's=' + query + '&type=movie'
-#     search_results = requests.get(search_url)
-#     json_results = search_results.json()
-#     #return HttpResponse(json_results['Search'])
+def search(request):
+    query = request.GET.get('query')
+    #search_url = url + 's=' + query + '&type=movie'
+    headers = { 'Accept': 'application/json' }
+    url_search = 'http://api.themoviedb.org/3/search/keyword'
+    pdb_set_trace()
+    request = Request(url_search , headers = headers)
+    response_body = urlopen(request).read()
+    return HttpResponse(json.dumps(response_body), content_type = "application/json")
+    #search_results = requests.get(search_url)
+    #json_results = search_results.json()
+    #return HttpResponse(json_results['Search'])
 
 def youtube_vid(movie_id):
     headers = { 'Accept': 'application/json' }
@@ -47,7 +54,7 @@ def show(request):
     try:
         # TMDB API Start
         movie_id = request.GET.get('query')
-        headers = {'Accept': 'application/json'}
+        headers = { 'Accept': 'application/json' }
         tmdb_query = url + movie_id + '?api_key=' + API_KEY
         tmdb_request = Request(tmdb_query, headers = headers)
         response_body = urlopen(tmdb_request).read()
