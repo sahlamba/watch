@@ -11,6 +11,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider',
         url: '/',
         templateUrl: '/static/views/home.html',
         controller: 'HomeController'
+      })
+      .state('show', {
+        url: '/movie/{name}',
+        templateUrl: '/static/views/movie.html',
+        controller: 'MovieController'
       });
 
     $interpolateProvider.startSymbol('{~');
@@ -27,4 +32,10 @@ app.directive('autofocus', ['$timeout', function ($timeout) {
       });
     }
   }
+}]);
+
+app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+  cfpLoadingBarProvider.latencyThreshold = 0;
+  cfpLoadingBarProvider.includeBar = false;
+  cfpLoadingBarProvider.parentSelector = '#ajax-loader';
 }]);

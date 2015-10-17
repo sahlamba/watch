@@ -27,6 +27,13 @@
   border-bottom-color: #000;
 }
 
+#ajax-loader {
+  width: 100px;
+  height: 38px;
+  display: inline-block;
+  vertical-align: top;
+}
+
 .search-results {
   position: relative;
   width: 100%;

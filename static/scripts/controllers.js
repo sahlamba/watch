@@ -29,3 +29,9 @@ app.controller('HomeController', ['$scope',
     $scope.title = 'Popcorn';
   }
 ]);
+
+app.controller('MovieController', ['$scope',
+  function ($scope) {
+    $scope.title = 'Popcorn';
+  }
+]);
