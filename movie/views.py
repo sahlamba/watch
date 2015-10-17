@@ -27,7 +27,9 @@ video_extensions = [".avi",".mp4",".mkv",".mpg",".mpeg",".mov",".rm",".vob",".wm
 
 def remove_ext(filename):
     # time for some cool coding, bitch!!
-    for ext in video_extensions return filename.replace(ext, "") if (filename.replace(ext, "") != filename)
+    for ext in video_extensions:
+        filename = filename.replace(ext, "")
+    return filename
     # hash = get_hash(filename)
 
 
@@ -46,11 +48,13 @@ def show(request):
     #response_body = urlopen(omdb_request).read()
     headers = {'Accept': 'application/json'}
     tmdb_query = url + movie_id + '?api_key=' + API_KEY
-    tmdb_request = Request(tmdb_query, headers)
-    response_body = urlopen(tbmd_request).read()
+    tmdb_request = Request(tmdb_query, headers = headers)
+    response_body = urlopen(tmdb_request).read()
     # Send json response to frontend
-    return HttpResponse(json.dumps(response_body), content_type = "application/json")
-
+    try:
+        return HttpResponse(json.dumps(response_body), content_type = "application/json")
+    except:
+        return HttpResponse(json.dumps({ "error": "Check the movie Id" }), content_type = "application/json")
 def subtitles(request):
     file_name = request.GET.get('query')
     file_name = remove_ext(file_name)
