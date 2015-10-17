@@ -7,5 +7,4 @@ urlpatterns = [
     # url(r'^api/v1/search/$', views.search, name='search'),
     # Show query example - /movie/api/v1/show/?query=imdbId
     url(r'^api/v1/show/$', views.show, name='show'),
-    url(r'^api/v1/sutitles/$', views.subtitles, name='subtitles'),
 ]
