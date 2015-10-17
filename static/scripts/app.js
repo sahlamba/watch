@@ -1,4 +1,5 @@
 // app.js
 'use strict';
 
-var app = angular.module('PopTheCorn', ['ui.router', 'ngAnimate']);
+var API_KEY = 'dff18c3dae351bbd69a9af3311e7cfea';
+var app = angular.module('PopTheCorn', ['ngSanitize', 'ui.router', 'ngAnimate', 'angular-loading-bar']);

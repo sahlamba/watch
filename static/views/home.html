@@ -1,1 +1,10 @@
-<h1>Hi! This is the {~title~} app.</h1>
+<div class="search-results" id="search-results">
+  <div class="welcome-message" ng-if="search.results.length === 0">
+    <img src="/static/popcorn.png" alt="Popcorn" />
+    <p class="title">Popcorn. <span class="light">Start there &uarr;</span></p>
+    <div class="underline"></div>
+  </div>
+  <div class="result-card" ng-repeat="result in search.results">
+    <h1 ng-bind="result.title"></h1>
+  </div>
+</div>

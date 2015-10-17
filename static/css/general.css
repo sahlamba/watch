@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-family: 'Source Sans Pro', sans-serif;
+  box-sizing: border-box;
+  outline: none;
+}
+
+span {
+  font-size: inherit;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.ui-view-container {
+  background-color: #fff;
+}
+
+i[class^="fi-"] {
+  font-size: 24px;
+  padding: 3px;
+  vertical-align: middle;
+}
+
+.fs16 {
+  font-size: 16px;
+}
+
+.grey-color {
+  color: #ccc;
+}
+
+.grey-bg {
+  background-color: #fafafa;
+}
+
+.la-ball-fall {
+  color: #C15757;
+  margin: 0 auto;
+}
+
+.home-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -9px;
+  margin-left: -27px;
+}
+
+.light {
+  font-weight: lighter;
+}
