@@ -6,6 +6,7 @@ import requests
 import pdb
 from urllib2 import Request, urlopen
 
+
 from django.http import HttpResponse
 # Create your views here.
 API_KEY = 'dff18c3dae351bbd69a9af3311e7cfea'
@@ -24,8 +25,8 @@ def search(request):
     query = request.GET.get('query')
     #search_url = url + 's=' + query + '&type=movie'
     headers = { 'Accept': 'application/json' }
-    url_search = 'http://api.themoviedb.org/3/search/keyword'
-    pdb_set_trace()
+    url_search = 'http://api.themoviedb.org/3/search/'
+    pdb.set_trace()
     request = Request(url_search , headers = headers)
     response_body = urlopen(request).read()
     return HttpResponse(json.dumps(response_body), content_type = "application/json")
@@ -79,6 +80,12 @@ def show(request):
         response_body["crew"] = full_crew
         response_body["subtitle"] = subtitle_url
         # TMDB API End
+        # YTS API Start
+        yts_url = urlopen('https://yts.to/api/v2/list_movies.json?movie_count=1').read()
+        torrents = json.loads(yts_url)["data"]["movies"][0]["torrents"]
+        for torrent in torrents:
+            response_body[str(torrent["quality"])] = str(torrent["url"])
+        # YTS API End
         # Send json response to frontend
         return HttpResponse(json.dumps(response_body), content_type = "application/json")
     except:
