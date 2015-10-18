@@ -19,8 +19,12 @@ app.factory('Search', ['$q', '$http', function ($q, $http) {
           return returnEmptyArr();
         } else {
           var deferred = $q.defer();
-          $http.get('http://api.themoviedb.org/3/search/movie?api_key=' + API_KEY + '&query=' + query)
+          $http.get('/movie/api/v1/search/?query=' + query)
             .success(function (data) {
+              angular.forEach(data.results, function (item) {
+                var parts = item.release_date.split('-');
+                item.year = parts[0];
+              });
               deferred.resolve(data.results);
             })
             .error(function (error) {

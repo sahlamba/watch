@@ -1,0 +1,14 @@
+<div class="movie" ng-init="getMovieData()" ng-style="{'background-image':'url(' + movie.backdrop + ')'}">
+  <div class="overlay">
+  </div>
+  <div class="loader" ng-hide="done">
+    <div class="la-ball-triangle-path">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div id="wrapper" ng-show="done">
+    <h1 ng-bind="movie.title"></h1>
+  </div>
+</div>

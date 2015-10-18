@@ -12,27 +12,18 @@ from django.http import HttpResponse
 API_KEY = 'dff18c3dae351bbd69a9af3311e7cfea'
 url = 'http://api.themoviedb.org/3/movie/'
 
-
-def remove_ext(filename):
-    # time for some cool coding, bitch!!
-    for ext in video_extensions:
-        filename = filename.replace(ext, "")
-    return filename
-    # hash = get_hash(filename)
-
 # API views
 def search(request):
     query = request.GET.get('query')
-    #search_url = url + 's=' + query + '&type=movie'
     headers = { 'Accept': 'application/json' }
-    url_search = 'http://api.themoviedb.org/3/search/'
-    pdb.set_trace()
+    url_search = 'http://api.themoviedb.org/3/search/movie?api_key=' + API_KEY + '&query=' + query;
     request = Request(url_search , headers = headers)
     response_body = urlopen(request).read()
+    response_body = json.loads(response_body)
+    response_body["results"] = [item for item in response_body["results"] if str(item["poster_path"]) != 'None']
+    for obj in response_body["results"]:
+        obj["poster_path"] = 'http://image.tmdb.org/t/p/original' + str(obj["poster_path"])
     return HttpResponse(json.dumps(response_body), content_type = "application/json")
-    #search_results = requests.get(search_url)
-    #json_results = search_results.json()
-    #return HttpResponse(json_results['Search'])
 
 def youtube_vid(movie_id):
     headers = { 'Accept': 'application/json' }
@@ -50,7 +41,7 @@ def credits(movie_id):
     credits_body = urlopen(credits_request).read()
     credits_body = json.loads(credits_body)
     return credits_body
-    
+
 def show(request):
     try:
         # TMDB API Start
@@ -63,19 +54,19 @@ def show(request):
         response_body = json.loads(response_body)
         response_body["trailer"] = trailer
         #returning image using poster path and backdrop path
-        response_body["poster"] = 'http://image.tmdb.org/t/p/w500/' + str(response_body["poster_path"])
-        response_body["backdrop"] = 'http://image.tmdb.org/t/p/w500/' + str(response_body["backdrop_path"])
+        response_body["poster"] = 'http://image.tmdb.org/t/p/original' + str(response_body["poster_path"])
+        response_body["backdrop"] = 'http://image.tmdb.org/t/p/w1280' + str(response_body["backdrop_path"])
         #in trailer link of trailer is stored, in subtitle subtitle url is saved
         subtitle_url = subtitles(str(response_body["original_title"]))
         credits_body = credits(movie_id)
         #start of cast
         full_cast = []
         for cast in credits_body["cast"][:5]:
-            full_cast.append({"character": str(cast["character"]), "name": str(cast["name"]), "photo": 'http://image.tmdb.org/t/p/w500/' + str(cast["profile_path"])})
+            full_cast.append({"character": str(cast["character"]), "name": str(cast["name"]), "photo": 'http://image.tmdb.org/t/p/original' + str(cast["profile_path"])})
         #end of cast
         # start of crew
         full_crew = [crew for crew in credits_body["crew"] if str(crew["job"]) == 'Director']
-        full_crew = [{"job": str(crew["job"]), "name": str(crew["name"]), "photo": 'http://image.tmdb.org/t/p/w500/' + str(crew["profile_path"])} for crew in full_crew]
+        full_crew = [{"job": str(crew["job"]), "name": str(crew["name"]), "photo": 'http://image.tmdb.org/t/p/original' + str(crew["profile_path"])} for crew in full_crew]
         response_body["cast"] = full_cast
         response_body["crew"] = full_crew
         response_body["subtitle"] = subtitle_url
@@ -89,7 +80,7 @@ def show(request):
         # Send json response to frontend
         return HttpResponse(json.dumps(response_body), content_type = "application/json")
     except:
-        return HttpResponse(json.dumps({ "error": "Check the movie Id" }), content_type = "application/json")
+        return HttpResponse(json.dumps({ "error": "Check the movie ID" }), content_type = "application/json")
 
 def subtitles(title):
     # convert title here

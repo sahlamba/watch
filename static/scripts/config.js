@@ -1,21 +1,20 @@
 // Config
 'use strict';
 
-app.config(['$stateProvider', '$urlRouterProvider', '$interpolateProvider',
-  function ($stateProvider, $urlRouterProvider, $interpolateProvider) {
+app.config(['$locationProvider', '$routeProvider', '$interpolateProvider',
+  function ($locationProvider, $routeProvider, $interpolateProvider) {
 
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      .state('home', {
-        url: '/',
+    $routeProvider
+      .when('/', {
         templateUrl: '/static/views/home.html',
         controller: 'HomeController'
       })
-      .state('show', {
-        url: '/movie/{name}',
+      .when('/movie/:id/', {
         templateUrl: '/static/views/movie.html',
         controller: 'MovieController'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
 
     $interpolateProvider.startSymbol('{~');
@@ -37,5 +36,6 @@ app.directive('autofocus', ['$timeout', function ($timeout) {
 app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
   cfpLoadingBarProvider.latencyThreshold = 0;
   cfpLoadingBarProvider.includeBar = false;
-  cfpLoadingBarProvider.parentSelector = '#ajax-loader';
+  cfpLoadingBarProvider.spinnerTemplate = '<div class="la-ball-triangle-path"><div></div><div></div><div></div></div>';
+  cfpLoadingBarProvider.parentSelector = '#loading';
 }]);

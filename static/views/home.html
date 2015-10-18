@@ -1,10 +1,18 @@
+<div ng-include src="'/static/views/header.html'"></div>
 <div class="search-results" id="search-results">
   <div class="welcome-message" ng-if="search.results.length === 0">
     <img src="/static/popcorn.png" alt="Popcorn" />
     <p class="title">Popcorn. <span class="light">Start there &uarr;</span></p>
     <div class="underline"></div>
   </div>
-  <div class="result-card" ng-repeat="result in search.results">
-    <h1 ng-bind="result.title"></h1>
+  <div class="results">
+    <a href="#/movie/{~result.id~}/" ng-repeat="result in search.results">
+      <div class="result-card"
+        ng-style="{'background-image':'url(' + result.poster_path + ')'}">
+        <div class="details">
+          <h1>{~result.title~} ({~result.year~})</h1>
+        </div>
+      </div>
+    </a>
   </div>
 </div>
