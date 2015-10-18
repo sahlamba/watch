@@ -48,13 +48,14 @@ def show(request):
         movie_id = request.GET.get('query')
         headers = { 'Accept': 'application/json' }
         tmdb_query = url + movie_id + '?api_key=' + API_KEY
-        omdb_query = 'http://www.omdbapi.com/?i=' + movie_id + '&plot=short&r=json'
         tmdb_request = Request(tmdb_query, headers = headers)
+        response_body = urlopen(tmdb_request).read()
+        response_body = json.loads(response_body)
+        imdb_id = response_body["imdb_id"]
+        omdb_query = 'http://www.omdbapi.com/?i=' + imdb_id + '&plot=short&r=json'
         omdb_request = Request(omdb_query)
         omdb_response_body = urlopen(omdb_request).read()
-        response_body = urlopen(tmdb_request).read()
         trailer = youtube_vid(movie_id)
-        response_body = json.loads(response_body)
         omdb_response_body = json.loads(omdb_response_body)
         response_body["trailer"] = trailer
         response_body["imdb"] = str(omdb_response_body["imdbRating"])

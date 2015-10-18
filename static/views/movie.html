@@ -13,7 +13,7 @@
       <img ng-src="{~movie.poster~}" alt="" />
     </div>
     <div class="data">
-      <h1>{~movie.title~} ({~movie.year~})</h1>
+      <h1>{~movie.title~} <i ng-if="movie.year">({~movie.year~})</i></h1>
       <i class="fi-quote" ng-if="movie.tagline !== null && movie.tagline !== ''"></i><h2 ng-if="movie.tagline !== null && movie.tagline !== ''">{~movie.tagline~}</h2>
       <p class="overview">
         {~movie.overview~}

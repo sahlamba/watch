@@ -35,8 +35,10 @@ app.controller('MovieController', ['$scope', '$http', '$routeParams', '$sce',
       $scope.done = false;
       $http.get('/movie/api/v1/show/?query=' + $routeParams.id)
         .success(function (data) {
-          var parts = data.release_date.split('-');
-          data.year = parts[0];
+          if (data.release_date) {
+            var parts = data.release_date.split('-');
+            data.year = parts[0];
+          }
           $scope.movie = data;
           $scope.done = true;
           $scope.movie.trailer = $sce.trustAsResourceUrl($scope.movie.trailer);
