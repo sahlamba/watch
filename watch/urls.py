@@ -17,13 +17,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from . import views
-# import settings
 
 urlpatterns = [
     url(r'^$', views.index, name= 'index'),
     url(r'^movie/', include('movie.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
-#
-# if settings.DEBUG:
-#    urlpatterns += staticfiles_urlpatterns()
