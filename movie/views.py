@@ -50,6 +50,10 @@ def show(request):
         tmdb_query = url + movie_id + '?api_key=' + API_KEY
         omdb_query = 'http://www.omdbapi.com/?i=' + movie_id + '&plot=short&r=json&tomatoes=true'
         tmdb_request = Request(tmdb_query, headers = headers)
+        response_body = urlopen(tmdb_request).read()
+        response_body = json.loads(response_body)
+        imdb_id = response_body["imdb_id"]
+        omdb_query = 'http://www.omdbapi.com/?i=' + imdb_id + '&plot=short&r=json&tomatoes=true'
         omdb_request = Request(omdb_query)
         omdb_response_body = urlopen(omdb_request).read()
         response_body = urlopen(tmdb_request).read()

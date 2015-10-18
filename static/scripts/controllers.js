@@ -42,7 +42,7 @@ app.controller('MovieController', ['$scope', '$http', '$routeParams', '$sce',
           $scope.movie = data;
           $scope.done = true;
           $scope.movie.trailer = $sce.trustAsResourceUrl($scope.movie.trailer);
-          var iframe = angular.element('<div class="trailer-wrapper"><p class="trailer-head">Trailer</p><iframe id="trailer" width="1024" height="576" src="' + $scope.movie.trailer + '" frameborder="0" allowfullscreen></iframe></div>');
+          var iframe = angular.element('<div class="trailer-wrapper"><iframe id="trailer" width="1024" height="576" src="' + $scope.movie.trailer + '" frameborder="0" allowfullscreen></iframe></div>');
           angular.element('#wrapper').append(iframe);
           console.log(data);
         });
