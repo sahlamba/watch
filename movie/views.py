@@ -48,11 +48,16 @@ def show(request):
         movie_id = request.GET.get('query')
         headers = { 'Accept': 'application/json' }
         tmdb_query = url + movie_id + '?api_key=' + API_KEY
+        omdb_query = 'http://www.omdbapi.com/?i=' + movie_id + '&plot=short&r=json'
         tmdb_request = Request(tmdb_query, headers = headers)
+        omdb_request = Request(omdb_query)
+        omdb_response_body = urlopen(omdb_request).read()
         response_body = urlopen(tmdb_request).read()
         trailer = youtube_vid(movie_id)
         response_body = json.loads(response_body)
+        omdb_response_body = json.loads(omdb_response_body)
         response_body["trailer"] = trailer
+        response_body["imdb"] = str(omdb_response_body["imdbRating"])
         #returning image using poster path and backdrop path
         response_body["poster"] = 'http://image.tmdb.org/t/p/original' + str(response_body["poster_path"])
         response_body["backdrop"] = 'http://image.tmdb.org/t/p/w1280' + str(response_body["backdrop_path"])
