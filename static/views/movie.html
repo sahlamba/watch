@@ -9,6 +9,21 @@
     </div>
   </div>
   <div id="wrapper" ng-show="done">
-    <h1 ng-bind="movie.title"></h1>
+    <div class="poster">
+      <img ng-src="{~movie.poster~}" alt="" />
+    </div>
+    <div class="data">
+      <h1>{~movie.title~} ({~movie.year~})</h1>
+      <i class="fi-quote" ng-if="movie.tagline !== null && movie.tagline !== ''"></i><h2 ng-if="movie.tagline !== null && movie.tagline !== ''">{~movie.tagline~}</h2>
+      <p class="overview">
+        {~movie.overview~}
+      </p>
+      <div class="imdb">
+        <img src="/static/imdb.png" alt="" />
+        <p>
+          {~movie.imdb~}
+        </p>
+      </div>
+    </div>
   </div>
 </div>

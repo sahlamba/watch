@@ -35,10 +35,12 @@ app.controller('MovieController', ['$scope', '$http', '$routeParams', '$sce',
       $scope.done = false;
       $http.get('/movie/api/v1/show/?query=' + $routeParams.id)
         .success(function (data) {
+          var parts = data.release_date.split('-');
+          data.year = parts[0];
           $scope.movie = data;
           $scope.done = true;
           $scope.movie.trailer = $sce.trustAsResourceUrl($scope.movie.trailer);
-          var iframe = angular.element('<iframe width="560" height="315" src="' + $scope.movie.trailer + '" frameborder="0" allowfullscreen></iframe>');
+          var iframe = angular.element('<div class="trailer-wrapper"><p class="trailer-head">Trailer</p><iframe id="trailer" width="1024" height="576" src="' + $scope.movie.trailer + '" frameborder="0" allowfullscreen></iframe></div>');
           angular.element('#wrapper').append(iframe);
           console.log(data);
         });

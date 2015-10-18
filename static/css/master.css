@@ -141,7 +141,76 @@
   padding: 50px 0;
 }
 
-#wrapper h1 {
+.data {
+  width: 60%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 4%;
+}
+
+.data h1 {
   color: #fff;
-  font-size: 24px;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.data i {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.data h2 {
+  font-weight: lighter;
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.data .overview {
+  margin-top: 25px;
+  font-size: 22px;
+  text-shadow: 0 0 10px #000;
+}
+
+.data .imdb {
+  margin-top: 20px;
+}
+
+.imdb img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.imdb p {
+  color: #ff6;
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.poster {
+  width: 30%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.poster img {
+  width: 100%;
+}
+
+.trailer-wrapper {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.trailer-head {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 20px;
 }

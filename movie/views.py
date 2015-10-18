@@ -31,7 +31,7 @@ def youtube_vid(movie_id):
     trailer_request = Request(trailer_query, headers = headers)
     response_body = urlopen(trailer_request).read()
     response_body = json.loads(response_body)
-    trailer_url = 'https://www.youtube.com/watch?v=' + str(response_body["results"][0]["key"])
+    trailer_url = 'https://www.youtube.com/embed/' + str(response_body["results"][0]["key"])
     return trailer_url
 
 def credits(movie_id):
