@@ -174,8 +174,19 @@
   text-shadow: 0 0 10px #000;
 }
 
-.data .imdb {
+.data .imdb, .data .tomatoes {
+  display: inline-block;
+  vertical-align: middle;
   margin-top: 20px;
+  margin-right: 40px
+}
+
+.tomatoes .rt-icon {
+  background-image: url("/static/tomatoes.png");
+  background-position: -192px -48px;
+  background-repeat: no-repeat;
+  width: 48px;
+  height: 48px;
 }
 
 .imdb img {
@@ -184,11 +195,15 @@
   margin-right: 10px;
 }
 
-.imdb p {
+.imdb p, .tomatoes p {
   color: #ff6;
   font-size: 30px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.tomatoes p {
+  color: #F06868;
 }
 
 .poster {
