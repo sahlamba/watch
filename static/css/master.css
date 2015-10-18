@@ -187,6 +187,8 @@
   background-repeat: no-repeat;
   width: 48px;
   height: 48px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .imdb img {

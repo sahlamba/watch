@@ -52,13 +52,14 @@ def show(request):
         response_body = urlopen(tmdb_request).read()
         response_body = json.loads(response_body)
         imdb_id = response_body["imdb_id"]
-        omdb_query = 'http://www.omdbapi.com/?i=' + imdb_id + '&plot=short&r=json'
+        omdb_query = 'http://www.omdbapi.com/?i=' + imdb_id + '&plot=short&r=json&tomatoes=true'
         omdb_request = Request(omdb_query)
         omdb_response_body = urlopen(omdb_request).read()
         trailer = youtube_vid(movie_id)
         omdb_response_body = json.loads(omdb_response_body)
         response_body["trailer"] = trailer
         response_body["imdb"] = str(omdb_response_body["imdbRating"])
+        response_body["tomatina"] = str(omdb_response_body["tomatoUserMeter"])
         #returning image using poster path and backdrop path
         response_body["poster"] = 'http://image.tmdb.org/t/p/original' + str(response_body["poster_path"])
         response_body["backdrop"] = 'http://image.tmdb.org/t/p/w1280' + str(response_body["backdrop_path"])
