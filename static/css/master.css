@@ -174,7 +174,7 @@
   text-shadow: 0 0 10px #000;
 }
 
-.data .imdb, .data .tomatoes {
+.data .imdb, .data .tomatoes, .data .runtime {
   display: inline-block;
   vertical-align: middle;
   margin-top: 20px;
@@ -189,15 +189,16 @@
   height: 48px;
   display: inline-block;
   vertical-align: middle;
+  margin-right: 10px;
 }
 
-.imdb img {
+.imdb img, .runtime i {
   display: inline-block;
   vertical-align: middle;
   margin-right: 10px;
 }
 
-.imdb p, .tomatoes p {
+.imdb p, .tomatoes p, .runtime p {
   color: #ff6;
   font-size: 30px;
   display: inline-block;
@@ -230,4 +231,26 @@
   display: block;
   font-size: 20px;
   margin-bottom: 20px;
+}
+
+.subtitle {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 40px;
+}
+
+.subtitle a {
+  display: block;
+}
+
+.subtitle a:hover .sub-bttn {
+  border-color: #F06868;
+  background-color: #F06868;
+}
+
+.subtitle a .sub-bttn {
+  padding: 3px 14px;
+  border: 2px solid #fff;
+  color: #fff;
+  margin-right: 20px;
 }

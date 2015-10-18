@@ -1,4 +1,5 @@
 <div class="movie" ng-init="getMovieData()" ng-style="{'background-image':'url(' + movie.backdrop + ')'}">
+  <div id="loading" style="display:none;"><div></div></div>
   <div class="overlay">
   </div>
   <div class="loader" ng-hide="done">
@@ -13,23 +14,59 @@
       <img ng-src="{~movie.poster~}" alt="" />
     </div>
     <div class="data">
-      <h1>{~movie.title~} <i ng-if="movie.year">({~movie.year~})</i></h1>
+      <a ng-href="{~movie.homepage~}" target="_blank">
+        <h1>{~movie.title~} <i ng-if="movie.year">({~movie.year~})</i></h1>
+      </a>
       <i class="fi-quote" ng-if="movie.tagline !== null && movie.tagline !== ''"></i><h2 ng-if="movie.tagline !== null && movie.tagline !== ''">{~movie.tagline~}</h2>
       <p class="overview">
         {~movie.overview~}
       </p>
-      <div class="imdb">
-        <img src="/static/imdb.png" alt="" />
-        <p>
-          {~movie.imdb~}
-        </p>
-      </div>
-      <div class="tomatoes">
-        <div class="rt-icon">
+      <p>
+        Genre: {~movie.genres~}
+      </p>
+      <div>
+        <div class="imdb">
+          <img src="/static/imdb.png" alt="" />
+          <p>
+            {~movie.imdb~}
+          </p>
         </div>
-        <p>
-          {~movie.tomatina~}%
-        </p>
+        <div class="tomatoes">
+          <div class="rt-icon">
+          </div>
+          <p>
+            {~movie.tomatina~}%
+          </p>
+        </div>
+        <div class="runtime">
+          <i class="fi-video"></i>
+          <p style="color:#fff;">
+            {~movie.runtime~} mins
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="subtitle" ng-if="movie.subtitle">
+          <a ng-href="{~movie.subtitle~}" target="_blank">
+            <div class="sub-bttn">
+              Subtitles <i class="fi-text-color"></i>
+            </div>
+          </a>
+        </div>
+        <div class="subtitle" ng-if="movie.v720p">
+          <a ng-href="{~movie.v720p~}">
+            <div class="sub-bttn">
+              720p <i class="fi-page"></i>
+            </div>
+          </a>
+        </div>
+        <div class="subtitle" ng-if="movie.v1080p">
+          <a ng-href="{~movie.v1080p~}">
+            <div class="sub-bttn">
+              1080p <i class="fi-page-filled"></i>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -79,10 +79,16 @@ def show(request):
         response_body["subtitle"] = subtitle_url
         # TMDB API End
         # YTS API Start
-        yts_url = urlopen('https://yts.to/api/v2/list_movies.json?movie_count=1').read()
+        yts_url = urlopen('https://yts.to/api/v2/list_movies.json?movie_count=1&query_term=' + response_body["imdb_id"]).read()
         torrents = json.loads(yts_url)["data"]["movies"][0]["torrents"]
+        genres = json.loads(yts_url)["data"]["movies"][0]["genres"]
+        response_body["genres"] = '';
+        for index, genre in enumerate(genres):
+            response_body["genres"] += str(genre)
+            if index < (len(genres) - 1):
+                response_body["genres"] += ', '
         for torrent in torrents:
-            response_body[str(torrent["quality"])] = str(torrent["url"])
+            response_body["v" + str(torrent["quality"])] = str(torrent["url"])
         # YTS API End
         # Send json response to frontend
         return HttpResponse(json.dumps(response_body), content_type = "application/json")
